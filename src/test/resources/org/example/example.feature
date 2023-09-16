@@ -6,11 +6,9 @@ Feature: An example
     And the submit button is clicked
     Then the newsletter confirmation pop-up appears
 
-
-
-  Scenario: Valid email US
+  Scenario: Valid email Governamental
     Given  I am on the main page
-    When  the email value of "tester@test.com" is inputted
+    When  the email value of "tester@gov.uk" is inputted
     And the submit button is clicked
     Then the newsletter confirmation pop-up appears
 
@@ -24,7 +22,6 @@ Feature: An example
     Given I am on the main page
     When I click enrollment button
      Then Personal information page is open
-
 
    Scenario: Start the What you'll learn
     Given I am on the main page
@@ -49,7 +46,7 @@ Feature: An example
     When the password is populated with the value of"DeiAndre"
     When the confirm password is populated with the value of"DeiAndre"
     When next personal information is clicked
-    Then the contact information page opens
+    Then the contact information is open
 
   Scenario: Enrollment for personal information with invalid name
     Given I am on the enrolment page
@@ -69,8 +66,7 @@ Feature: An example
     When the password is populated with the value of""
     When the confirm password is populated with the value of""
     When next personal information is clicked
-
-
+    Then I remain on the personal information page
 
   Scenario: Contact Information with valid data
     Given I am on the contact information page
@@ -80,13 +76,10 @@ Feature: An example
     When the city is populated with the value of"Cucuietiidindeal"
     When the post code is populated with the value of"0000"
     When next contact information is clicked
+    Then the course options appear
 
 
 
-  Scenario: Course Options fill in the form is required
-    Given I am on course options page
-    When software testing manual tester certificate is clicked
-    When software testing automation tester is clicked
 
 
 

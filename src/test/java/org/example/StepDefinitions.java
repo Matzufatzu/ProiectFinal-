@@ -4,9 +4,13 @@ import PageObjects.ContactInformation;
 import PageObjects.MainPage;
 import PageObjects.PersonalInformation;
 import PageObjects.CourseOptions;
+import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.*;
 
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -128,10 +132,6 @@ public class StepDefinitions {
     public void theConfirmPasswordIsPopulatedWithTheValue(String string){
         personalInformation.inputConfirmPassword(string);
     }
-    @Then("the contact information page opens")
-    public void theContactInformationPageOpens(){
-
-    }
 
     @When("next personal information is clicked")
     public void theNextPersonalInformation(){
@@ -173,7 +173,7 @@ public class StepDefinitions {
     }
     @Then("the contact information is open")
     public void theContactInformationIsOpen() {
-        Assertions.assertEquals("ContactInformation", contactInformation.contactInformationHeaderText());
+        Assertions.assertEquals("Contact information", contactInformation.contactInformationHeaderText());
     }
 
 
@@ -192,8 +192,33 @@ public class StepDefinitions {
     public void softwareTestingManualTesterCertificateIsClicked() {
     }
 
+    @Then("the course options appear")
+    public void theCourseOptionsAppear() {
+        Assertions.assertEquals("Software Testing | Enrollment",driver.getTitle());
+    }
+
+    @When("I selected one options")
+    public void iSelectedOneOptions() {
 
     }
+
+    @Then("I remain on the personal information page")
+    public void iRemainOnThePersonalInformationPage() {
+        Assertions.assertEquals("Personal information", personalInformation.personalInformationHeaderText());
+    }
+
+    @After
+    public void cleanUp(Scenario scenario) {
+        if (scenario.isFailed()) {
+            final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot, "image/jpg", "");
+        }
+        driver.quit();
+    }
+}
+
+
+
 
 
 
